@@ -1,0 +1,148 @@
+@import 'fonts';
+@import 'variables';
+
+
+/** Reset styles */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, li,
+pre, figure,
+table, td, tr, th {
+	margin: 0px;
+	padding: 0px;
+}
+
+/**
+ * Structure and layout
+ */
+body {
+	min-height: 100vh;
+}
+
+.container {
+	margin-right: auto;
+	margin-left: auto;
+	padding: $spacing-1x;
+	max-width: 75rem;
+	background-color: white;
+}
+
+.page-header {
+	margin-bottom: 3 * $spacing-1x;
+
+	h1 {
+		font-size: 3em;
+		border-bottom: 2px solid black;
+	}
+}
+
+.site-nav {
+	font-family: $font-headings;
+	text-decoration: none;
+	.site-nav--item {
+		list-style-type: none;
+		display: inline-block;
+		margin-right: $typography-vertical-spacing;
+	}
+	.site-nav--item__current {
+		border-bottom: 2px solid black;
+	}
+	.site-nav--item__home {
+		font-size: 1.2em;
+	}
+	a {
+		text-decoration: none;
+	}
+}
+
+
+
+/** Typography and rich text */
+body {
+	font-family: $font-body;
+	padding: 0.5 * $spacing-1x;
+	line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-headings;
+}
+
+a {
+	color: $colour-independence;
+}
+
+@mixin text-margins {
+		margin-top: $typography-vertical-spacing;
+		margin-bottom: $typography-vertical-spacing;
+}
+.rich-text {
+	text-align: justify;
+
+	h2 { font-size: 2.5em; }
+	h3 { font-size: 2em; }
+	h4 { font-size: 1.5em; }
+	h5 { font-size: 1.25em; }
+	h6 { font-size: 1em; }
+
+	p, ul, ol {
+		@include text-margins();
+	}
+
+	ul, ol {
+		clear: left;
+		margin-left: $spacing-1x;
+		ul, ol {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	hr {
+		@include text-margins();
+		border: 0 none;
+		border-bottom: 2px solid black;
+	}
+}
+
+.figure {
+	@include text-margins();
+
+	.figure--media, img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+		margin: 0 auto;
+	}
+
+	.figure--caption {
+		font-size: 0.8em;
+		border-bottom: 2px solid black;
+	}
+}
+
+.inline-figure {
+	@include text-margins();
+
+	&.inline-figure__left {
+		float: left;
+		margin-right: $typography-vertical-spacing;
+	}
+
+	&.inline-figure__right {
+		float: right;
+		margin-left: $typography-vertical-spacing;
+	}
+
+	.figure--media, img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+	}
+}
+
+
+@import 'components/pygments';

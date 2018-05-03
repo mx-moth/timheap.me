@@ -1,0 +1,18 @@
+# git files
+.gitignore
+.git/
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Locally installed packages
+.venv/
+node_modules/
+
+# Development junk
+dev/
+data/
+**/*.sw?
+**/*.zip

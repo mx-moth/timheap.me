@@ -1,0 +1,56 @@
+version: '2.3'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
+
+    volumes:
+      - './design:/app/design'
+      - './timheap/static:/app/static'
+      - './package.json:/app/package.json'
+      - './yarn.lock:/app/yarn.lock'
+
+    command: npm run watch
+
+  backend: &backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+
+    command: ./manage.py runserver 0.0.0.0:8000
+
+    ports:
+      - '80:8000'
+
+    volumes:
+      - './timheap:/app/timheap'
+      - './tests:/app/tests'
+      - './data/:/app/data/'
+      - './deploy:/app/deploy/'
+      - './dev/settings.py:/app/devsettings.py'
+      - './manage.py:/app/manage.py'
+
+    environment:
+      - 'DJANGO_SETTINGS_MODULE=devsettings'
+
+    depends_on:
+      - database
+
+    links:
+      - mail
+      - frontend
+
+  database:
+    image: postgres
+    ports:
+      - '5432:5432'
+
+
+  mail:
+    image: djfarrelly/maildev
+    ports:
+      - "9000:80"

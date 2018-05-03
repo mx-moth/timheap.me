@@ -1,0 +1,32 @@
+{% load wagtailcore_tags %}
+{% load timheap_tags %}
+<nav class="site-nav">
+	<ul class="site-nav--items">
+		{% pageurlblock request.site.root_page as href %}
+			<li class="
+				site-nav--item site-nav--item__home
+				{% if request.site.root_page.pk == page.pk %}site-nav--item__current{% endif %}">
+				<a href="{{ href }}">
+					{{ request.site.site_name }}
+				</a>
+			</li>
+		{% endpageurlblock %}
+		{% for child in value %}
+			{% if child.block_type == 'page' %}
+				{% pageurlblock child.value as href %}
+				<li class="site-nav--item {% if child.value.pk == page.pk %}site-nav--item__current{% endif %}">
+					<a href="{{ href }}">
+						{{ child.value }}
+					</a>
+				</li>
+				{% endpageurlblock %}
+			{% elif child.block_type == 'url' %}
+				<li class="site-nav--item">
+					<a href="{{ child.value.url }}">
+						{{ child.value.text }}
+					</a>
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</nav>

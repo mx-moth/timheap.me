@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+
+{% load wagtailcore_tags %}
+{% load timheap_tags %}
+
+{% block title %}Page not found{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="page-header">
+		<h1>Page not found</h1>
+	</div>
+	<div class="rich-text">
+		<p>The URL <strong>{{ request.build_absolute_uri }}</strong> was not found.</p>
+		<p>That thing you're looking for ain't here.</p>
+	</div>
+</div>
+{% endblock %}

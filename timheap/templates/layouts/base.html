@@ -1,0 +1,39 @@
+<!doctype html>
+{% load static wagtailcore_tags timheap_tags %}
+{% use_google_analytics as ga_enabled %}
+<html lang="en-AU">
+	<head>
+		<title>{% block title %}{% endblock %} - Tim Heap</title>
+		{% block styles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+		{% endblock %}
+		{% block extra_head %}{% endblock %}
+		{% if ga_enabled %}
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', '{{ settings.timheap.sitesettings.google_analytics_code }}');
+		</script>
+		{% endif %}
+	</head>
+	<body>
+		<header>
+			{% block header %}
+				<div class="container">
+					{% include_block settings.timheap.menus.header %}
+				</div>
+			{% endblock %}
+		</header>
+		<main>
+			{% block content %}{% endblock %}
+		</main>
+		{% block scripts %}
+		<script src="{% static 'js/app.dist.js' %}"></script>
+		{% if ga_enabled %}
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.timheap.sitesettings.google_analytics_code }}"></script>
+		{% endif %}
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailuserbar %}
+{% load wagtailmetadata_tags %}
+{% load timheap_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block extra_head %}{% meta_tags page %}{% endblock %}
+{% block scripts %}{% wagtailuserbar %}{% endblock %}

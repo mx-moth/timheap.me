@@ -1,0 +1,192 @@
+@import 'fonts';
+@import 'variables';
+
+$spacing: 0.5em;
+$border-radius: 6px;
+$border-color: #ddd;
+$block-color: #fff;
+$background-color: #fafafa;
+
+.content-wrapper {
+    margin-bottom: 10em;
+}
+.stream-field {
+	background-color: $background-color;
+
+	label {
+		width: 100%;
+		padding: 0;
+	}
+	.field-content {
+		width: 100%;
+	}
+	ul.fields > li {
+		padding: 0;
+		margin: 0;
+		margin-bottom: $spacing * 2;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.sequence {
+		min-height: 2em;
+	}
+	.sequence-controls {
+		position: relative;
+		top: auto;
+		right: auto;
+		visibility: visible;
+		opacity: 1;
+		background-color: $border-color;
+		border: 0 none;
+		border-top-left-radius: $border-radius;
+		border-top-right-radius: $border-radius;
+
+		h3 label {
+			color: #222;
+		}
+		.button {
+			background-color: #ccc;
+			border: 0 none;
+			color: #222;
+		}
+		.button:hover {
+			background-color: #bbb;
+		}
+	}
+	.sequence-container-inner li.sequence-member {
+		&,
+		& .sequence-member-inner .sequence-member {
+			padding: 0;
+			margin: 2em $spacing * 2;
+			border: 0 none;
+			background-color: transparent;
+		}
+		.sequence-member-inner {
+			border: 1px solid $border-color;
+			border-top: 0 none;
+			border-bottom-left-radius: $border-radius;
+			border-bottom-right-radius: $border-radius;
+			background-color: $block-color;
+			padding: $spacing;
+			margin: 0;
+		}
+		.struct-block {
+			.fields {
+				width: 100%;
+			}
+			.sequence-container {
+				width: 100%;
+				padding: 0 $spacing * 2;
+			}
+			.sequence-container .sequence-member-inner {
+				padding: 0;
+			}
+			.sequence-container .sequence-container-inner>button:last-child {
+				margin-bottom: 2em;
+			}
+		}
+	}
+	.sequence-container-inner .sequence-container {
+		border: 1px solid #e6e6e6;
+		background-color: #fafafa;
+		border-radius: $border-radius;
+		padding: 0 $spacing * 2;
+	}
+	.stream-menu {
+		visibility: hidden;
+		opacity: 0;
+		top: 1em;
+		visibility: visible;
+		opacity: 1;
+
+		.toggle {
+			height: 1em;
+			width: 1em;
+			top: -.5em;
+			z-index: 1;
+			&::before {
+				font-size: 1em;
+			}
+		}
+	}
+
+	.object ul.multiple {
+		margin-left: -50px;
+		margin-right: -50px;
+		padding-left: 1em;
+		padding-right: 1em;
+		padding-bottom: 1em;
+		width: 100%;
+		float: none;
+		display: block;
+		max-width: none;
+
+		> li {
+			background-color: $block-color;
+			border: 1px solid $border-color;
+			border-radius: $border-radius;
+			padding: 0;
+			margin: 2em 0;
+		}
+
+		.controls {
+			top: 0;
+			right: 0;
+
+			button {
+				background-color: #ccc;
+				border: 0 none;
+				color: #222;
+				&:hover {
+					background-color: #bbb;
+				}
+			}
+		}
+
+		fieldset {
+			max-width: none;
+			width: 100%;
+		}
+		label {
+			width: 100%;
+			padding: 0;
+		}
+		.field-content {
+			width: 100%;
+		}
+		ul.fields > li {
+			padding: 0;
+			margin: 0;
+			margin-bottom: 1em;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+
+.input-monospace textarea {
+	font-family: monospace;
+	background-color: $colour-eggshell;
+}
+.block-heading {
+	input { font-family: $font-headings; }
+	&.block-heading--h2 input { font-size: 3em; }
+	&.block-heading--h3 input { font-size: 2em; }
+	&.block-heading--h4 input { font-size: 1.5em; }
+	&.block-heading--h5 input { font-size: 1.25em; }
+	&.block-heading--h6 input { font-size: 1em; }
+}
+.widget-draftail_rich_text_area .Draftail-Editor .DraftEditor-root {
+	font-family: $font-body;
+}
+.block-hr {
+	border: 0 none;
+	border-bottom: 2px solid black;
+}
+
+textarea {
+	resize: vertical;
+}

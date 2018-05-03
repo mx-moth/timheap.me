@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{% load wagtailcore_tags %}
+{% load timheap_tags %}
+
+{% block title %}Server error{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Server error</h1>
+    </div>
+    <div class="rich-text">
+        <p>Something terrible has happened. Wail and despair.</p>
+    </div>
+</div>
+{% endblock %}
