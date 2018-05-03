@@ -1,0 +1,36 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+  - postgres
+
+env:
+  - IMAGE_NAME=timheap/timheap
+
+install:
+  # Build each stage tagged separately, so they can be tested independently.
+  - docker build --tag "${IMAGE_NAME}_frontend" --target frontend .
+  - docker build --tag "${IMAGE_NAME}_backend" --target backend .
+  - docker build --tag "${IMAGE_NAME}" .
+
+script:
+  # Run backend tests
+  - docker run
+    --net=host
+    --volume `pwd`/tests:/app/tests
+    --env DATABASE_URL="postgres://postgres@localhost/postgres"
+    "${IMAGE_NAME}_backend"
+    ./tests/runtests.sh
+
+before_deploy:
+  # REGISTRY_USER and REGISTRY_PASS are injected secrets
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master

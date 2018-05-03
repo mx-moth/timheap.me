@@ -1,8 +1,8 @@
 import os
 
 from dj_database_url import parse
+
 from timheap.settings import *  # noqa
-from timheap.settings import INSTALLED_APPS
 
 SECRET_KEY = 'super secret shhhhh'
 DEBUG = True
