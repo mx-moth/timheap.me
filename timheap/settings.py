@@ -1,23 +1,20 @@
 """
 Base Django settings for timheap.me
 """
-from pathlib import Path, PurePosixPath
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).absolute().parent.parent
+from pathlib import PurePosixPath
 
 INSTALLED_APPS = [
     'timheap',
 
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.users',
-    'wagtail.snippets',
-    'wagtail.documents',
-    'wagtail.images',
-    'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    'wagtail.documents',
+    'wagtail.embeds',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.sites',
+    'wagtail.snippets',
+    'wagtail.users',
 
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.settings',
@@ -81,7 +78,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 LANGUAGE_CODE = 'en-au'
-TIME_ZONE = 'Australia/Melbourne'
+TIME_ZONE = 'Australia/Hobart'
 USE_I18N = False
 USE_L10N = False
 USE_TZ = True
@@ -134,7 +131,6 @@ LOGGING = {
             'include_html': True,
         }
     },
-
     'loggers': {
         'django': {
             'handlers': ['console', 'mail_admins'],
