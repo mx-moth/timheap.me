@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 from django.views.generic.base import TemplateView
+from wagtail.contrib.sitemaps.views import sitemap
 
 from .views import ErrorView
 
@@ -14,6 +15,7 @@ handler500 = ErrorView.as_view(template_name='layouts/500.html', status=500)
 urlpatterns = [
     path('robots.txt', TemplateView.as_view(
         content_type='text/plain', template_name='robots.txt')),
+    path('sitemap.xml', sitemap),
 
     path('admin/', include(wagtail.admin.urls)),
 
