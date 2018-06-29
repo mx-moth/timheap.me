@@ -16,3 +16,4 @@ dev/
 data/
 **/*.sw?
 **/*.zip
+.tox

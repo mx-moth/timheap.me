@@ -13,21 +13,29 @@ install:
   # Build each stage tagged separately, so they can be tested independently.
   - docker build --tag "${IMAGE_NAME}_frontend" --target frontend .
   - docker build --tag "${IMAGE_NAME}_backend" --target backend .
-  - docker build --tag "${IMAGE_NAME}" .
+  - docker build --tag "${IMAGE_NAME}_tox" --target tox .
 
 script:
   # Run backend tests
   - docker run
+    --rm
     --net=host
     --volume `pwd`/tests:/app/tests
     --env DATABASE_URL="postgres://postgres@localhost/postgres"
     "${IMAGE_NAME}_backend"
-    ./tests/runtests.sh
+    /app/tests/runtests.sh
+  - docker run
+    --rm
+    --net=host
+    --volume `pwd`:/app
+    "${IMAGE_NAME}_tox"
+    tox
+
 
 before_deploy:
   # REGISTRY_USER and REGISTRY_PASS are injected secrets
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+  - docker tag "${IMAGE_NAME}_backend" "${IMAGE_NAME}:latest"
 
 deploy:
   provider: script

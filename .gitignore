@@ -6,3 +6,4 @@
 .venv
 data
 timheap/static/
+.tox/

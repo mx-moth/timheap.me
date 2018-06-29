@@ -49,3 +49,7 @@ ENV PYTHONUNBUFFERED=1 \
 EXPOSE 80
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/app/deploy/run.sh"]
+
+FROM backend as tox
+RUN pip3 install --no-cache-dir tox
+CMD ["tox"]

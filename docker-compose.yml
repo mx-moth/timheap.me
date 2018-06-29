@@ -27,15 +27,10 @@ services:
       - '80:8000'
 
     volumes:
-      - './timheap:/app/timheap'
-      - './tests:/app/tests'
-      - './data/:/app/data/'
-      - './deploy:/app/deploy/'
-      - './dev/settings.py:/app/devsettings.py'
-      - './manage.py:/app/manage.py'
+      - '.:/app'
 
     environment:
-      - 'DJANGO_SETTINGS_MODULE=devsettings'
+      - 'DJANGO_SETTINGS_MODULE=dev.settings'
 
     depends_on:
       - database
