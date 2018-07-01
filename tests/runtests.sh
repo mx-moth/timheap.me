@@ -1,10 +1,9 @@
 #!/bin/ash
 
-TEST_DATA='/app/test-data'
-cd /app
-mkdir -p "${TEST_DATA}"
-
+export TEST_DATA=$( mktemp -d )
 export DJANGO_SETTINGS_MODULE=tests.settings
+
+cd /opt/backend
 ./manage.py test "$@"
 exit_code=$?
 

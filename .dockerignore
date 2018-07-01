@@ -4,16 +4,17 @@
 
 # Docker files
 Dockerfile
-.dockerignore
 docker-compose.yml
+.dockerignore
 
 # Locally installed packages
 .venv/
-node_modules/
+**/node_modules/
 
 # Development junk
 dev/
 data/
+static/
 **/*.sw?
 **/*.zip
 .tox

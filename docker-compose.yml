@@ -8,10 +8,11 @@ services:
       target: frontend
 
     volumes:
-      - './design:/app/design'
-      - './timheap/static:/app/static'
-      - './package.json:/app/package.json'
-      - './yarn.lock:/app/yarn.lock'
+      - './data:/opt/data'
+      - './design:/opt/frontend/design'
+      - './static:/opt/frontend/static'
+      - './package.json:/opt/frontend/package.json'
+      - './yarn.lock:/opt/frontend/yarn.lock'
 
     command: npm run watch
 
@@ -27,7 +28,7 @@ services:
       - '80:8000'
 
     volumes:
-      - '.:/app'
+      - '.:/opt/backend'
 
     environment:
       - 'DJANGO_SETTINGS_MODULE=dev.settings'

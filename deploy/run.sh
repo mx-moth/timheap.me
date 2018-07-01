@@ -1,6 +1,6 @@
 #!/bin/ash -e
 
-cd /app
+cd /opt/backend
 
 # Run upgrade in the background
 ./deploy/upgrade.sh &

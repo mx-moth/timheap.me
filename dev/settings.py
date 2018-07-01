@@ -14,7 +14,7 @@ ALLOWED_HOSTS = ['timheap.vcap.me', '*', 'localhost']
 INTERNAL_IPS = ['127.0.0.1', '172.19.0.1']
 BASE_URL = 'http://timheap.vcap.me'
 
-DATA_ROOT = '/app/data/'
+DATA_ROOT = '/opt/data/'
 
 DATABASES = {
     'default': parse('postgres://postgres@database/postgres'),

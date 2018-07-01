@@ -13,29 +13,34 @@ install:
   # Build each stage tagged separately, so they can be tested independently.
   - docker build --tag "${IMAGE_NAME}_frontend" --target frontend .
   - docker build --tag "${IMAGE_NAME}_backend" --target backend .
-  - docker build --tag "${IMAGE_NAME}_tox" --target tox .
+  - docker build --tag "${IMAGE_NAME}" .
 
 script:
   # Run backend tests
-  - docker run
-    --rm
-    --net=host
-    --volume `pwd`/tests:/app/tests
+  # First, create and start the container with a command that does nothing
+  - docker container create
+    --name backend_tests
+    --net host
+    --volume `pwd`/tests:/opt/backend/tests
+    --volume `pwd`/setup.cfg:/opt/backend/setup.cfg
     --env DATABASE_URL="postgres://postgres@localhost/postgres"
     "${IMAGE_NAME}_backend"
-    /app/tests/runtests.sh
-  - docker run
-    --rm
-    --net=host
-    --volume `pwd`:/app
-    "${IMAGE_NAME}_tox"
-    tox
+    tail -f /dev/null
+  - docker container start backend_tests
+
+  # Run the standard test suite
+  - docker container exec backend_tests ./tests/runtests.sh
+
+  # Run the style tests
+  - docker container exec backend_tests pip3 install flake8 isort
+  - docker container exec backend_tests flake8 timheap/ tests/
+  - docker container exec backend_tests isort --recursive --check-only --diff timheap/ tests/
 
 
 before_deploy:
   # REGISTRY_USER and REGISTRY_PASS are injected secrets
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker tag "${IMAGE_NAME}_backend" "${IMAGE_NAME}:latest"
+  - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:latest"
 
 deploy:
   provider: script

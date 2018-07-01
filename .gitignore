@@ -5,5 +5,5 @@
 !.elasticbeanstalk/*.global.yml
 .venv
 data
-timheap/static/
+static/
 .tox/

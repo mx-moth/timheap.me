@@ -94,7 +94,11 @@ TIME_FORMAT = "P"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+STATICFILES_DIRS = [
+    '/opt/frontend/static',
 ]
 
 ROOT_URL = PurePosixPath('/')
