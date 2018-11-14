@@ -7,13 +7,13 @@ WORKDIR /opt/frontend
 COPY package.json yarn.lock /opt/frontend/
 
 RUN yarn && \
-    yarn cache clean && \
-    true
+	yarn cache clean && \
+	true
 
 COPY ./design/ /opt/frontend/design/
 
-RUN npm run build
-CMD ["npm", "run", "watch"]
+RUN yarn run build
+CMD ["yarn", "run", "watch"]
 
 # Backend application
 FROM alpine as backend
@@ -21,9 +21,11 @@ FROM alpine as backend
 WORKDIR /opt/backend
 
 RUN apk add --no-cache \
-        tini \
-        uwsgi uwsgi-python3 \
-        python3 python3-dev py3-pillow postgresql-dev gcc musl-dev
+		tini \
+		python3 python3-dev py3-pillow \
+		postgresql-dev gcc musl-dev \
+		uwsgi uwsgi-python3 \
+	&& true
 
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel \
@@ -37,12 +39,12 @@ COPY ./manage.py /opt/backend/manage.py
 COPY --from=frontend /opt/frontend/static /opt/frontend/static
 
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONIOENCODING=UTF-8 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONPATH=/opt/ \
-    DJANGO_SETTINGS_MODULE=deploy.settings \
-    LC_ALL=C.UTF-8 \
-    LANG=C.UTF-8
+	PYTHONIOENCODING=UTF-8 \
+	PYTHONDONTWRITEBYTECODE=1 \
+	DJANGO_SETTINGS_MODULE=deploy.settings \
+	LC_ALL=C.UTF-8 \
+	LANG=C.UTF-8 \
+	UWSGI_PROCESSES=1
 
 EXPOSE 80
 ENTRYPOINT ["/sbin/tini", "--"]

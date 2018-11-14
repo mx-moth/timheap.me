@@ -8,7 +8,6 @@ services:
       target: frontend
 
     volumes:
-      - './data:/opt/data'
       - './design:/opt/frontend/design'
       - './static:/opt/frontend/static'
       - './package.json:/opt/frontend/package.json'
@@ -42,9 +41,6 @@ services:
 
   database:
     image: postgres
-    ports:
-      - '5432:5432'
-
 
   mail:
     image: djfarrelly/maildev
