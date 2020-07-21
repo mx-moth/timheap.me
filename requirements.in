@@ -4,7 +4,7 @@ django-ses~=0.8.5
 dj-database-url
 boto3~=1.6.23
 
-wagtail~=2.0.0
+wagtail~=2.7.4
 wagtail-metadata~=2.0.0
 
 pillow==4.3.0  # Version from alpine linux
