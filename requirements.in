@@ -9,7 +9,7 @@ wagtail-metadata~=2.0.0
 
 pillow==4.3.0  # Version from alpine linux
 olefile==0.43  # Version from alpine linux
-pygments~=2.2.0
+pygments~=2.7.4
 
 psycopg2~=2.7.4
 pytest~=3.6.2
